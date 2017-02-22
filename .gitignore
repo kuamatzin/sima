@@ -7,3 +7,9 @@
 Homestead.json
 Homestead.yaml
 .env
+/resources/assets/bower
+/public/cotizacionesEnviadas
+.phpintel
+./phpintel
+./phpintel/*
+!/vendor/phpoffice/phpword/src/PhpWord/TemplateProcessor.php
