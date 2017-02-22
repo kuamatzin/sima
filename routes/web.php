@@ -187,5 +187,3 @@ Route::get('reportes/busqueda_por_procedimiento', 'ReportesController@busqueda_p
 Route::get('ajustar_cantidades/{procedimiento_id}', 'PartidasController@ajustar');
 Route::post('ajustar_cantidades/{procedimiento_id}', 'PartidasController@storeAjuste');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
