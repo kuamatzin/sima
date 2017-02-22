@@ -154,28 +154,28 @@ class ProveedoresController extends Controller {
 						$oferta = Oferta::where('procedimiento_id', $invitacion->procedimiento->id)->where('proveedor_id', $invitacion->proveedor->id)->where('partida_id', $partida[0])->first();
 						if ($oferta != null) {
 							$oferta->status = 1;
-							$oferta->cantidad = $partida[1];
-							$oferta->precio_unitario = $partida[2];
-							$oferta->importe_sin_iva = $partida[3];
-							$oferta->iva = $partida[4];
-							$oferta->importe_con_iva = $partida[5];
-							$oferta->monto_total = $partida[6];
-							$oferta->marca = $partida[7];
+							$oferta->cantidad = $partida[1] == null ? '' : $partida[1];
+							$oferta->precio_unitario = $partida[2] == null ? '' : $partida[2];
+							$oferta->importe_sin_iva = $partida[3] == null ? '' : $partida[3];
+							$oferta->iva = $partida[4] == null ? '' : $partida[4];
+							$oferta->importe_con_iva = $partida[5] == null ? '' : $partida[5];
+							$oferta->monto_total = $partida[6] == null ? '' : $partida[6];
+							$oferta->marca = $partida[7] == null ? '' : $partida[7];
 							$oferta->save();
 						}
 						else {
 							$oferta = new Oferta();
 							$oferta->status = 1;
-							$oferta->cantidad = $partida[1];
-							$oferta->precio_unitario = $partida[2];
-							$oferta->importe_sin_iva = $partida[3];
-							$oferta->iva = $partida[4];
-							$oferta->importe_con_iva = $partida[5];
-							$oferta->monto_total = $partida[6];
+							$oferta->cantidad = $partida[1] == null ? '' : $partida[1];
+							$oferta->precio_unitario = $partida[2] == null ? '' : $partida[2];
+							$oferta->importe_sin_iva = $partida[3] == null ? '' : $partida[3];
+							$oferta->iva = $partida[4] == null ? '' : $partida[4];
+							$oferta->importe_con_iva = $partida[5] == null ? '' : $partida[5];
+							$oferta->monto_total = $partida[6] == null ? '' : $partida[6];
 							$oferta->partida_id = $partida[0];;
 							$oferta->procedimiento_id = $invitacion->procedimiento->id;
 							$oferta->proveedor_id = $invitacion->proveedor->id;
-							$oferta->marca = $partida[7];
+							$oferta->marca = $partida[7] == null ? '' : $partida[7];
 							$oferta->save();
 						}
 					}
