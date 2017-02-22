@@ -132,22 +132,22 @@ class RequisicionesController extends Controller {
 		$requisicion->cargo_asesor = $request->cargo_asesor;
 		$requisicion->email_asesor = $request->email_asesor;
 		$requisicion->dias_pago = $request->dias_pago;
-		$requisicion->observaciones = $request->observaciones;
-		$requisicion->requisitos_tecnicos = $request->requisitos_tecnicos;
-		$requisicion->requisitos_economicos = $request->requisitos_economicos;
-		$requisicion->requisitos_informativos = $request->requisitos_informativos;
+		$requisicion->observaciones = $request->observaciones == null ? '' : $request->observaciones;
+		$requisicion->requisitos_tecnicos = $request->requisitos_tecnicos == null ? '' : $request->requisitos_tecnicos;
+		$requisicion->requisitos_economicos = $request->requisitos_economicos == null ? '' : $request->requisitos_economicos;
+		$requisicion->requisitos_informativos = $request->requisitos_informativos == null ? '' : $request->requisitos_informativos;
 		$requisicion->condiciones_pago = $request->condiciones_pago;
 		$requisicion->datos_facturacion = $request->datos_facturacion;
-		$requisicion->anticipo = $request->anticipo;
+		$requisicion->anticipo = $request->anticipo == null ? '' : $request->anticipo;
 		$requisicion->vigencia = $request->vigencia == null ? 0 : 1;
-		$requisicion->vigencia_especificacion = $request->vigencia_especificacion;
+		$requisicion->vigencia_especificacion = $request->vigencia_especificacion == null ? '' : $request->vigencia_especificacion;
 		$requisicion->dias_entrega_lunes_viernes = $request->dias_entrega_lunes_viernes;
-		$requisicion->dias_entrega_texto = $request->dias_entrega_texto;
-		$requisicion->hora_entrega_inicial = $request->hora_entrega_inicial;
-		$requisicion->hora_entrega_final = $request->hora_entrega_final;
+		$requisicion->dias_entrega_texto = $request->dias_entrega_texto == null ? '' : $request->dias_entrega_texto;
+		$requisicion->hora_entrega_inicial = $request->hora_entrega_inicial == null ? '' : $request->hora_entrega_inicial;
+		$requisicion->hora_entrega_final = $request->hora_entrega_final == null ? '' : $request->hora_entrega_final;
 		$requisicion->instalacion = $request->instalacion == null ? 0 : 1;
 		$requisicion->empacado = $request->empacado == null ? 0 : 1;
-		$requisicion->lista_requisitos = $request->lista_requisitos;
+		$requisicion->lista_requisitos = $request->lista_requisitos == null ? '' : $request->lista_requisitos;
 		$requisicion->save();
 	}
 

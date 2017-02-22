@@ -103,14 +103,14 @@
         {!! Form::label('hora_entrega_inicial', 'Horario de entrega') !!}
         <div class="row">
             <div class="col-md-5">
-                {!! Form::text('hora_entrega_inicial', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '8 am']) !!}
+                {!! Form::text('hora_entrega_inicial', null, ['class' => 'form-control', 'placeholder' => '8 am']) !!}
                 <small class="text-danger">{{ $errors->first('hora_entrega_inicial') }}</small>
             </div>
             <div class="col-md-2">
                 <p>a</p>
             </div>
             <div class="col-md-5">
-                {!! Form::text('hora_entrega_final', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => '3 pm']) !!}
+                {!! Form::text('hora_entrega_final', null, ['class' => 'form-control', 'placeholder' => '3 pm']) !!}
                 <small class="text-danger">{{ $errors->first('hora_entrega_final') }}</small>
             </div>
         </div>
@@ -138,7 +138,7 @@
 <div class="row">
     <div class="form-group col-md-4{{ $errors->has('garantia') ? ' has-error' : '' }}">
         {!! Form::label('garantia', 'Garantía') !!}
-        {!! Form::select('garantia', ['3 meses' => '3 meses', '6 meses' => '6 meses', '12 meses' => '12 meses', '24 meses' => '24 meses', '36 meses' => '36 meses', 'Durante el evento' => 'Durante el evento', 'Durante el contrato' => 'Durante el contrato', 'Durante la entrega' => 'Durante la entrega'], null, ['id' => 'garantia', 'class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::select('garantia', ['3 meses' => '3 meses', '6 meses' => '6 meses', '12 meses' => '12 meses', '24 meses' => '24 meses', '36 meses' => '36 meses', 'Durante el evento' => 'Durante el evento', 'Durante el contrato' => 'Durante el contrato', 'Durante la entrega' => 'Durante la entrega'], null, ['id' => 'garantia', 'class' => 'form-control']) !!}
         <small class="text-danger">{{ $errors->first('garantia') }}</small>
     </div>
     <div class="form-group col-md-4">
