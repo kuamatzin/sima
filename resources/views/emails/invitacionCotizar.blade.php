@@ -26,14 +26,17 @@
     <div id="wrap">
         <div class="container">
             <div class="row">
+                <col-md-8 class="col-md-offset-2">
+                    {!! Html::image('http://tlaxcala.reqsiaa.com/images/logo_completo.png' , 'Secretaria de Salud', array('class' => 'img-responsive center-block')) !!}
+                </col-md-8>
+            </div>
+            <div class="row">
                 <div class="col-md-3">
-                    {!! Html::image('http://tlaxcala.reqsiaa.com/images/tlaxcala_nuevo.png' , 'Secretaria de Salud', array('class' => 'img-responsive')) !!}
                 </div>
                 <div class="col-md-6">
                     <h3 class="nav-title text-center">GOBIERNO DEL ESTADO DE TLAXCALA <br> OFICIALÍA MAYOR DE GOBIERNO <br> DIRECCIÓN  DE RECURSOS MATERIALES, SERVICIOS Y ADQUISICIONES</h3>
                 </div>
                 <div class="col-md-3">
-                    {!! Html::image('http://tlaxcala.reqsiaa.com/images/oficialia.png' , 'Secretaria de Salud', array('class' => 'img-responsive pull-right inline-block')) !!}
                 </div>
             </div>
         </div>
@@ -62,6 +65,16 @@
                 LEONARDA GOMEZ BLANCO No. 60 ALTOS, ACXOTLA DEL RIO, TOTOLAC, TLAX. C.P. 90160
 TELEFONOS 246 46 50 900- 46 5 29 60 EXT. 1811 Y 1812.
 CORREO: (DE USUARIO COMPRADOR)
+            </p>
+            <br><br><br>
+            <p>Aviso de Privacidad</p>
+            <br>
+            <p>
+                ESTE MENSAJE ESTÁ DIRIGIDO EXCLUSIVAMENTE A LAS PERSONAS QUE TIENEN LAS DIRECCIONES DE CORREO ELECTRÓNICO ESPECIFICADAS EN LOS DESTINATARIOS DENTRO DE SU ENCABEZADO. SI POR ERROR USTED HA RECIBIDO ESTE MENSAJE, POR NINGÚN MOTIVO DEBE REVELAR SU CONTENIDO, COPIARLO, DISTRIBUIRLO O UTILIZARLO. LE SOLICITAMOS POR FAVOR COMUNIQUE DEL ERROR A LA DIRECCIÓN DE CORREO ELECTRÓNICO REMITENTE Y ELIMINE DICHO MENSAJE JUNTO CON CUALQUIER DOCUMENTO ADJUNTO QUE PUDIERA CONTENER. LOS DERECHOS DE PRIVACIDAD Y CONFIDENCIALIDAD DE LA INFORMACIÓN EN ESTE MENSAJE NO DEBEN PERDERSE POR EL HECHO DE HABERSE TRASMITIDO ERRÓNEAMENTE O POR CAUSAS DE INTERFERENCIAS EN EL FUNCIONAMIENTO DE LOS SISTEMAS DE CORREO Y CANALES DE COMUNICACIÓN. EN CONSIDERACIÓN A QUE LOS MENSAJES ENVIADOS DE MANERA ELECTRÓNICA PUEDEN SER INTERCEPTADOS Y MANIPULADOS, LA DIRECCIÓN DE RECURSOS MATERIALES, SERVICIOS Y ADQUISICIONES DEL ESTADO DE TLAXCALA NO SE HACE RESPONSABLE SI LOS MENSAJES LLEGAN CON DEMORA, INCOMPLETOS, ELIMINADOS O CON ALGÚN PROGRAMA MALICIOSO DENOMINADO COMO VIRUS INFORMÁTICO.
+                <br><br>
+                LO ANTERIOR EN CUMPLIMIENTO A LO DISPUESTO EN LOS ARTÍCULOS 2, 3, 16, 17, 18, 19, 20, 21, 27, 43, 44, 45, 46, 47 DE LA LEY GENERAL DE PROTECCIÓN DE DATOS PERSONALES EN POSESIÓN DE SUJETOS OBLIGADOS.
+
+
             </p>
         </div>
     </div>
