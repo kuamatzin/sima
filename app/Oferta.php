@@ -61,4 +61,12 @@ class Oferta extends Model {
     {
         return number_format($this->importe_sin_iva, 2);
     }
+
+    //Setters
+    public function setMarcaAttribute($value)
+    {
+        if ($value == null) {
+            $this->attributes['marca'] = '';
+        }       
+    }
 }
