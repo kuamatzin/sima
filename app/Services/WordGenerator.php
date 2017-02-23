@@ -103,6 +103,7 @@ class WordGenerator
              $value = $key + 1;
              if ($requisicion->anio == '2017') {
                 $document->setValue("clave#$value", htmlspecialchars($partida->clave));
+                $document->setValue("cantidad_maxima#$value", htmlspecialchars($partida->cantidad_maxima));
             }
              $document->setValue("no_partida#$value", htmlspecialchars($value));
              $document->setValue("cantidad#$value", htmlspecialchars($partida->cantidad_minima));
