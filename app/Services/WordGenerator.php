@@ -326,6 +326,7 @@ class WordGenerator
         $document->setValue('cargo_autoriza', htmlspecialchars($requisicion->dependencia->cargo_autoriza));
         $document->setValue('visto_bueno', htmlspecialchars($requisicion->dependencia->valida));
         $document->setValue('cargo_valida', htmlspecialchars($requisicion->dependencia->cargo_valida));
+        $requisitos_lista = '';
         if ($requisicion->lista_requisitos != '' && $requisicion->lista_requisitos != null) {
             foreach ($requisicion->lista_requisitos as $key => $requisito) {
                 $requisitos_lista = $requisitos_lista . "-$requisito" . "lineBreak";

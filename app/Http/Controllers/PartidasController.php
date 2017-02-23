@@ -87,6 +87,7 @@ class PartidasController extends Controller {
 	public function update(PartidaRequest $request , $id_requisicion, $id_partida)
 	{
 		$partida = Partida::findOrFail($id_partida);
+		$request['cantidad_maxima'] = $request->cantidad_maxima == null ? '' : $request->cantidad_maxima;
 		$partida->update($request->all());
 
 		return redirect('partidas/' . $id_requisicion);
