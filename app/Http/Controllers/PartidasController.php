@@ -49,6 +49,7 @@ class PartidasController extends Controller {
 	{
 		$request['requisicion_id'] = $id_requisicion;
 		$request['cantidad_maxima'] = $request->cantidad_maxima == null ? '' : $request->cantidad_maxima;
+		$request['clave'] = $request->clave == null ? '' : $request->clave;
 		Auth::user()->partidas()->create($request->all());
 
 		return redirect('partidas/' . $id_requisicion);
@@ -88,6 +89,7 @@ class PartidasController extends Controller {
 	{
 		$partida = Partida::findOrFail($id_partida);
 		$request['cantidad_maxima'] = $request->cantidad_maxima == null ? '' : $request->cantidad_maxima;
+		$request['clave'] = $request->clave == null ? '' : $request->clave;
 		$partida->update($request->all());
 
 		return redirect('partidas/' . $id_requisicion);
