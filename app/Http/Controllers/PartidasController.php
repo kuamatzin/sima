@@ -48,6 +48,7 @@ class PartidasController extends Controller {
 	public function store(PartidaRequest $request, $id_requisicion)
 	{
 		$request['requisicion_id'] = $id_requisicion;
+		$request['cantidad_maxima'] = $request->cantidad_maxima == null ? '' : $request->cantidad_maxima;
 		Auth::user()->partidas()->create($request->all());
 
 		return redirect('partidas/' . $id_requisicion);

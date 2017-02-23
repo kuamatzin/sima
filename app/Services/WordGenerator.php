@@ -299,7 +299,7 @@ class WordGenerator
     {
         $now = Carbon::now();
         $requisicion = $procedimiento->requisiciones[0];
-        $document = new \PhpOffice\PhpWord\TemplateProcessor('inv.docx');
+        $document = $requisicion->anio == '2017' ? new \PhpOffice\PhpWord\TemplateProcessor('inv2017.docx') : new \PhpOffice\PhpWord\TemplateProcessor('inv.docx');
         $document->setValue('unidad_responsable', htmlspecialchars($requisicion->dependencia->nombre));
         $document->setValue('domicilio', htmlspecialchars($requisicion->dependencia->calle . " " . $requisicion->dependencia->numero_exterior . "-" . $requisicion->dependencia->numero_interior . ". " . $requisicion->dependencia->colonia));
         $document->setValue('anio', htmlspecialchars($now->year));
@@ -326,6 +326,15 @@ class WordGenerator
         $document->setValue('cargo_autoriza', htmlspecialchars($requisicion->dependencia->cargo_autoriza));
         $document->setValue('visto_bueno', htmlspecialchars($requisicion->dependencia->valida));
         $document->setValue('cargo_valida', htmlspecialchars($requisicion->dependencia->cargo_valida));
+        if ($requisicion->lista_requisitos != '' && $requisicion->lista_requisitos != null) {
+            foreach ($requisicion->lista_requisitos as $key => $requisito) {
+                $requisitos_lista = $requisitos_lista . "-$requisito" . "lineBreak";
+            }
+            $document->setValue('requisitos_lista', htmlspecialchars($requisitos_lista));
+        }
+        else {
+            $document->setValue('requisitos_lista', htmlspecialchars(''));
+        }
 
         foreach ($requisicion->partidas as $key => $partida) {
             $value = $key + 1;
@@ -333,6 +342,9 @@ class WordGenerator
             $document->setValue("cantidad#$value", htmlspecialchars($partida->cantidad_minima));
             $document->setValue("unidad_medida#$value", htmlspecialchars($partida->unidad_medida));
             $document->setValue("descripcion_partida#$value", htmlspecialchars($partida->descripcion));
+            if ($requisicion->anio == '2017') {
+                $document->setValue("modelo#$value", htmlspecialchars($partida->clave));
+            }
             $document->setValue("marca#$value", htmlspecialchars($partida->marca));
             $document->setValue("precio_unitario#$value", htmlspecialchars(""));
             $document->setValue("importe#$value", htmlspecialchars(""));
