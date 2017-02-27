@@ -66,7 +66,7 @@ class UnidadesAdministrativasController extends Controller {
 	public function edit($id)
 	{
 		$nullOption = "Dependencia a la que pertenece";
-		$dependencias = ['' => "$nullOption"] + Dependencia::lists('nombre', 'id');
+		$dependencias = ['' => "$nullOption"] + Dependencia::pluck('nombre', 'id')->toArray();
 		$unidad_administrativa = UnidadAdministrativa::findOrFail($id);
 		return view('unidades_administrativas.edit', compact('unidad_administrativa', 'dependencias'));
 	}
