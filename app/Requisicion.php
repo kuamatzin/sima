@@ -236,4 +236,9 @@ class Requisicion extends Model {
         return $this->procedimiento->status;
     }
 
+    public function getVigencia()
+    {
+        return $this->vigencia ? "SI" : "NO";
+    }
+
 }

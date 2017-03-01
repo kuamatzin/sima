@@ -27,6 +27,13 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p><strong>Requisitos Técnicos</strong></p>
+            @if($invitacion->procedimiento->requisiciones[0]->lista_requisitos)
+            <ul>
+                @foreach($invitacion->procedimiento->requisiciones[0]->lista_requisitos as $key => $requisito)
+                    <li>{{$requisito}}</li>
+                @endforeach
+            </ul>
+            @endif
             <p>
                 {{$invitacion->procedimiento->requisiciones[0]->requisitos_tecnicos}}
             </p>
@@ -40,11 +47,15 @@
             <p>
                 {{$invitacion->procedimiento->requisiciones[0]->requisitos_informativos}}
             </p>
+            <p>
+                Vigencia de contrato: {{$invitacion->procedimiento->requisiciones[0]->getVigencia()}}
+            </p>
             <hr>
             <p><strong>Condiciones de Pago</strong></p>
             <p>
                 {{$invitacion->procedimiento->requisiciones[0]->condiciones_pago}}
             </p>
+            <p>ANTICIPO: {{$invitacion->procedimiento->requisiciones[0]->anticipo}}</p>
             <hr>
             <p><strong>Lugar de Entrega</strong></p>
             <p>
@@ -54,6 +65,12 @@
             <p><strong>Tiempo de Entrega</strong></p>
             <p>
                 {{$invitacion->procedimiento->requisiciones[0]->tiempo_entrega}}
+            </p>
+            <p>
+                DIAS DE ENTREGA: {{$invitacion->procedimiento->requisiciones[0]->dias_entrega_lunes_viernes}}
+            </p>
+            <p>
+                HORARIO DE ENTREGA: DE {{$invitacion->procedimiento->requisiciones[0]->hora_entrega_inicial}} A {{$invitacion->procedimiento->requisiciones[0]->hora_entrega_final}}
             </p>
             <hr>
             <p><strong>Datos de Facturación</strong></p>
@@ -120,6 +137,20 @@
                         <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
                             {!! Form::label($partida->id, 'Marca') !!}
                             {!! Form::text($partida->id . '_marca', $ofertas_proveedor->where('partida_id', $partida->id)->first()->marca, ['class' => 'form-control', 'required' => 'required', 'id' => $key . '_marca', 'readonly']) !!}
+                            <small class="text-danger">{{ $errors->first($partida->id) }}</small>
+                        </div>
+                        @endif
+
+                        @if($partida->clave == '')
+                        <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
+                            {!! Form::label($partida->id, 'Clave o Modelo') !!}
+                            {!! Form::text($partida->id . '_clave', $ofertas_proveedor->where('partida_id', $partida->id)->first()->clave, ['class' => 'form-control', 'id' => $key . '_clave']) !!}
+                            <small class="text-danger">{{ $errors->first($partida->id) }}</small>
+                        </div>
+                        @else
+                        <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
+                            {!! Form::label($partida->id, 'Clave o Modelo') !!}
+                            {!! Form::text($partida->id . '_clave', $ofertas_proveedor->where('partida_id', $partida->id)->first()->clave, ['class' => 'form-control', 'required' => 'required', 'id' => $key . '_clave', 'readonly']) !!}
                             <small class="text-danger">{{ $errors->first($partida->id) }}</small>
                         </div>
                         @endif

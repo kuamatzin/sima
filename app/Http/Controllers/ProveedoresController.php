@@ -233,6 +233,8 @@ class ProveedoresController extends Controller {
 					$oferta->importe_con_iva = $request->{$numero_partida . '_importe_con_iva'};
 					$oferta->monto_total = $request->{$numero_partida . '_monto_total'};
 					$oferta->marca = $request->{$numero_partida . '_marca'};
+					$oferta->clave = $request->{$numero_partida . '_clave'};
+					
 					$oferta->save();
 				}
 				else {
@@ -248,6 +250,7 @@ class ProveedoresController extends Controller {
 					$oferta->procedimiento_id = $invitacion->procedimiento->id;
 					$oferta->proveedor_id = $invitacion->proveedor->id;
 					$oferta->marca = $request->{$numero_partida . '_marca'};
+					$oferta->clave = $request->{$numero_partida . '_clave'};
 					$oferta->save();
 				}
 				$llave = $llave + 8;

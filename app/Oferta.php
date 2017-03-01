@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Oferta extends Model {
 
-	protected $fillable = ['procedimiento_id', 'proveedor_id', 'partida_id', 'status', 'motivo', 'cantidad', 'cantidad_minima', 'cantidad_maxima', 'precio_unitario', 'importe_sin_iva', 'iva', 'importe_con_iva', 'monto_total', 'marca', 'condiciones_pago', 'tiempo_entrega', 'vigencia'];
+	protected $fillable = ['procedimiento_id', 'proveedor_id', 'partida_id', 'status', 'motivo', 'cantidad', 'cantidad_minima', 'cantidad_maxima', 'precio_unitario', 'importe_sin_iva', 'iva', 'importe_con_iva', 'monto_total', 'condiciones_pago', 'tiempo_entrega', 'vigencia', 'clave', 'marca'];
     
     /**
      * Una oferta pertenece a una partida
@@ -60,13 +60,5 @@ class Oferta extends Model {
     public function getImporteSinIva()
     {
         return number_format($this->importe_sin_iva, 2);
-    }
-
-    //Setters
-    public function setMarcaAttribute($value)
-    {
-        if ($value == null) {
-            $this->attributes['marca'] = '';
-        }       
     }
 }
