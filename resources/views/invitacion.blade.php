@@ -12,7 +12,7 @@
     <div id="wrap">
         <div class="container-fluid">
             {!! Html::image('images/logo_completo.png' , 'Secretaria de Salud', array('width' => '150px' ,'class' => 'img-responsive inline-block')) !!}
-            <h1 class="nav-title">GOBIERNO DEL ESTADO DE TLAXCALA</h1>
+            <h1 class="nav-title">GOBIERNO DEL ESTADO DE TLAXCALA </h1>
             {!! Html::image('images/siaa.png' , 'Secretaria de Salud', array('width' => '110px' ,'class' => 'img-responsive pull-right inline-block')) !!}
         </div>
         <div class="container">
