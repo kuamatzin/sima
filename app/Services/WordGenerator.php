@@ -259,6 +259,7 @@ class WordGenerator
                 $document->setValue("cantidad#$value", htmlspecialchars($ofertas->{$partida->id . '_cantidad'}));
                 $document->setValue("unidad_medida#$value", htmlspecialchars($partida->unidad_medida));
                 $document->setValue("descripcion_partida#$value", htmlspecialchars($partida->descripcion));
+                $document->setValue("clave#$value", htmlspecialchars($ofertas->{$partida->id . '_clave'}));
                 $document->setValue("marca#$value", htmlspecialchars($ofertas->{$partida->id . '_marca'}));
                 $document->setValue("precio_unitario#$value", htmlspecialchars('$' . $ofertas->{$partida->id . '_precio_unitario'}));
                 $document->setValue("importe#$value", htmlspecialchars('$' . $ofertas->{$partida->id . '_importe_sin_iva'}));
