@@ -22,6 +22,48 @@
     
     <h3>{{$invitacion->procedimiento->requisiciones[0]->descripcion}}</h3>
 
+    <br>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p><strong>Requisitos Técnicos</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->requisitos_tecnicos}}
+            </p>
+            <hr>
+            <p><strong>Requisitos Económicos</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->requisitos_economicos}}
+            </p>
+            <hr>
+            <p><strong>Requisitos Informativos</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->requisitos_informativos}}
+            </p>
+            <hr>
+            <p><strong>Condiciones de Pago</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->condiciones_pago}}
+            </p>
+            <hr>
+            <p><strong>Lugar de Entrega</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->lugar_entrega}}
+            </p>
+            <hr>
+            <p><strong>Tiempo de Entrega</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->tiempo_entrega}}
+            </p>
+            <hr>
+            <p><strong>Datos de Facturación</strong></p>
+            <p>
+                {{$invitacion->procedimiento->requisiciones[0]->datos_facturacion}}
+            </p>
+            <hr>
+        </div>
+    </div>
+
     <hr>
     <input type="hidden" class="form-control" id="numPartidas" value="{{$partidas->count()}}" v-model="numeroPartidas">
     {!! Form::open(['url' => 'cotizacion/' .  $invitacion->url, 'files' => true]) !!}
