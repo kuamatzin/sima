@@ -141,11 +141,19 @@
                         </div>
                         @endif
 
+                        @if($partida->clave == '')
+                        <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
+                            {!! Form::label($partida->id, 'Clave o Modelo') !!}
+                            {!! Form::text($partida->id . '_clave', $ofertas_proveedor->where('partida_id', $partida->id)->first()->clave, ['class' => 'form-control', 'id' => $key . '_clave']) !!}
+                            <small class="text-danger">{{ $errors->first($partida->id) }}</small>
+                        </div>
+                        @else
                         <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
                             {!! Form::label($partida->id, 'Clave o Modelo') !!}
                             {!! Form::text($partida->id . '_clave', $ofertas_proveedor->where('partida_id', $partida->id)->first()->clave, ['class' => 'form-control', 'required' => 'required', 'id' => $key . '_clave', 'readonly']) !!}
                             <small class="text-danger">{{ $errors->first($partida->id) }}</small>
                         </div>
+                        @endif
 
                         <div class="form-group col-md-6 @if($errors->first('descripcion')) has-error @endif">
                             {!! Form::label('descripcion', 'Descripcion Técnica') !!}
@@ -194,13 +202,18 @@
                             <small class="text-danger">{{ $errors->first($partida->id) }}</small>
                         </div>
                         @else
-
                         <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
                             {!! Form::label($partida->id, 'Marca') !!}
                             {!! Form::text($partida->id . '_marca', $partida->marca, ['class' => 'form-control', 'required' => 'required', 'id' => $key . '_marca', 'readonly']) !!}
                             <small class="text-danger">{{ $errors->first($partida->id) }}</small>
                         </div>
                         @endif
+
+                        <div class="form-group col-md-2 @if($errors->first($partida->id)) has-error @endif">
+                            {!! Form::label($partida->id, 'Clave/Modelo') !!}
+                            {!! Form::text($partida->id . '_clave', $partida->clave, ['class' => 'form-control', 'id' => $key . '_clave']) !!}
+                            <small class="text-danger">{{ $errors->first($partida->id) }}</small>
+                        </div>
 
                         <div class="form-group col-md-6 @if($errors->first('descripcion')) has-error @endif">
                             {!! Form::label('descripcion', 'Descripcion Técnica') !!}
