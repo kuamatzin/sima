@@ -32,7 +32,19 @@ class WordGenerator
     public function createDocument($requisicion)
     {
         $now = Carbon::now();
-        $document = $requisicion->anio == '2017' ? new \PhpOffice\PhpWord\TemplateProcessor('req2017.docx') : new \PhpOffice\PhpWord\TemplateProcessor('req.docx');
+        $req_sin_cantidad_max = false;
+        if ($requisicion->anio ==  '2017') {
+            if ($requisicion->partidas->sum('cantidad_maxima') == 0) {
+                $document = new \PhpOffice\PhpWord\TemplateProcessor('req2017_sin_cantidad_max.docx');
+                $req_sin_cantidad_max = true;
+            }
+            else {
+                $document = new \PhpOffice\PhpWord\TemplateProcessor('req2017.docx');
+            }
+        }
+        else {
+            $document = new \PhpOffice\PhpWord\TemplateProcessor('req.docx');
+        }
         $document->setValue('contratante', htmlspecialchars($requisicion->dependencia->nombre));
         $document->setValue('tipo_procedimiento', htmlspecialchars($requisicion->value_procedimiento_adjudicacion()));
         $document->setValue('garantia', htmlspecialchars($requisicion->garantia));
@@ -103,7 +115,9 @@ class WordGenerator
              $value = $key + 1;
              if ($requisicion->anio == '2017') {
                 $document->setValue("clave#$value", htmlspecialchars($partida->clave));
-                $document->setValue("cantidad_maxima#$value", htmlspecialchars($partida->cantidad_maxima));
+                if (!$req_sin_cantidad_max) {
+                    $document->setValue("cantidad_maxima#$value", htmlspecialchars($partida->cantidad_maxima));
+                }
             }
              $document->setValue("no_partida#$value", htmlspecialchars($value));
              $document->setValue("cantidad#$value", htmlspecialchars($partida->cantidad_minima));
