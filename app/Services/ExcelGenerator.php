@@ -502,7 +502,7 @@ class ExcelGenerator
             $excel->sheet($descripcion, function($sheet) use($prov, $datos_excel, $celdas, $proveedores, $letras, $partidas, $fila_inicio) {
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
-                $objDrawing->setPath(public_path('images/encabezado_2.png')); //your image path
+                $objDrawing->setPath(public_path('images/encabezado_cuadro.png')); //your image path
                 $objDrawing->setCoordinates('A1');
                 $objDrawing->setWorksheet($sheet);
                 // Set size for a single cell
