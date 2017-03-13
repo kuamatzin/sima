@@ -289,8 +289,13 @@ class OfertasController extends Controller {
 			return view('ofertas.analisis_comparativo', compact('procedimiento', 'partidas', 'ofertas_cuadroComparativo', 'proveedores', 'size_proveedores'));
 		}
 		else {
-			$excel = new ExcelGenerator;
-			$excel->descargaCuadroComparativo($procedimiento->id, $procedimiento->requisiciones[0]->descripcion, $proveedores, $partidas, $ofertas_cuadroComparativo, $size_proveedores);
+			if ($id == 517) {
+				return response()->download("cuadros_comparativos/$id.xlsx");
+			}
+			else {
+				$excel = new ExcelGenerator;
+				$excel->descargaCuadroComparativo($procedimiento->id, $procedimiento->requisiciones[0]->descripcion, $proveedores, $partidas, $ofertas_cuadroComparativo, $size_proveedores);
+			}
 		}
 	}
 
