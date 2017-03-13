@@ -38,7 +38,8 @@
 @endif
 <div class="form-group col-md-12">
     {!! Form::label('descripcion', 'Descripción') !!}
-    {!! Form::text('descripcion', null, ['class' => 'form-control']) !!}
+    {!! Form::text('descripcion', null, ['class' => 'form-control', 'placeholder' => 'CONCEPTO DE ACUERDO AL CLASIFICADOR DE GASTO POR OBJETO VIGENTE
+']) !!}
     <small class="text-danger">{{ $errors->first('descripcion') }}</small>
 </div>
 <div class="form-group col-md-4">
