@@ -327,13 +327,22 @@ class UsuariosController extends Controller {
 				'email'          => 'required|email|max:255|unique:users',
 			];
 		}
+		if ($request['password'] != '') {
+			$rules['password'] = 'required|confirmed|min:6';
+		}
 		
 		$validator = Validator::make($request, $rules);
 
 		if ($validator->fails()) {
 			dd("MAL");
 		}
-		else{
+		else {
+			if ($request['password'] == '') {
+				unset($request['password']);
+			}
+			else {
+				$request['password'] = bcrypt($request['password']);
+			}
 			$user->update($request);
 			return redirect("unidades_administrativas/$user->unidad_administrativa_id");
 		}

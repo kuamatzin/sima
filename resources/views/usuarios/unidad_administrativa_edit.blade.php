@@ -21,6 +21,18 @@
         {!! Form::select('privilegios', [0 => 'Tipo de Usuario', 4 => 'Analista Unidad Administrativa'], null, ['id' => 'privilegios', 'class' => 'form-control', 'required' => '']) !!}
         <small class="text-danger">{{ $errors->first('privilegios') }}</small>
     </div>
+
+    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+        {!! Form::label('password', 'Password') !!}
+        {!! Form::password('password', ['class' => 'form-control']) !!}
+        <small class="text-danger">{{ $errors->first('password') }}</small>
+    </div>
+
+    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+        {!! Form::label('password_confirmation', 'Confirmar Password') !!}
+        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+        <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
+    </div>
     
     <button type="submit" class="btn btn-success pull-right">Editar</button>
 {!! Form::close() !!}
