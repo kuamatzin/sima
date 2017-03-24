@@ -19,16 +19,16 @@ class ReportesController extends Controller {
      */
     public function index()
     {
-        $proveedores = ['' => "Indiferente"] + Proveedor::orderBy('nombre', 'asc')->pluck('nombre', 'id');
-        $dependencias = ['' => "Indiferente"] + Dependencia::pluck('nombre', 'id');
-        $usuarios = ['' => "Indiferente"] + User::where('privilegios', 5)->pluck('name', 'id');
+        $proveedores = ['' => "Indiferente"] + Proveedor::orderBy('nombre', 'asc')->pluck('nombre', 'id')->toArray();
+        $dependencias = ['' => "Indiferente"] + Dependencia::pluck('nombre', 'id')->toArray();
+        $usuarios = ['' => "Indiferente"] + User::where('privilegios', 5)->pluck('name', 'id')->toArray();
         $procedimientos = [];
-        return view('reportes.reportes', compact('dependencias', 'usuarios', 'procedimientos', 'proveedores'));	
+        return view('reportes.reportes', compact('dependencias', 'usuarios', 'procedimientos', 'proveedores'));
     }
 
     public function busqueda(Request $request)
     {
-        $procedimientos = Requisicion::with('getValueStatusAttribute')->where('asignada', 1);
+        $procedimientos = Requisicion::where('asignada', 1);
 
         if ((int)$request->usuario_id != 0) {
             if ($request->status != '') {
@@ -52,8 +52,9 @@ class ReportesController extends Controller {
         if ($request->dependencia_id != 0) {
             $procedimientos->where('dependencia_id', $request->dependencia_id);
         }
+
         $procedimientos->where('anio', $request->ejercicio_fiscal);
-        $procedimientos = $procedimientos->get();
+        $procedimientos = $procedimientos->get()->toArray();
         if ($request->proveedor != '') {
             foreach ($procedimientos as $key => $procedimiento) {
                 $proveedoresAdjudicados = $procedimiento->procedimiento->proveedoresAdjudicados()->pluck('id');

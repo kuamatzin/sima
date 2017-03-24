@@ -179,66 +179,66 @@ class Requisicion extends Model {
 	}
 
 	public function getPresupuestoAttribute($value)
-    {
-        return number_format($value, 2);
-    }
+            {
+                return number_format($value, 2);
+            }
 
-    public function value_procedimiento_adjudicacion()
-    {
-    	$procedimiento_adjudicacion = $this->procedimiento_adjudicacion;
-    	switch ($procedimiento_adjudicacion) {
-    		case '1':
-    			return "Adjudicacion Directa";
-    			break;
-    		case "2":
-    			return "Invitación a cuando menos tres";
-    			break;
-    		case "3":
-    			return "Licitación Pública";
-    			break;
-    		default:
-    			return "Sin asignar";
-    			break;
-    	}
-    }
+            public function value_procedimiento_adjudicacion()
+            {
+            	$procedimiento_adjudicacion = $this->procedimiento_adjudicacion;
+            	switch ($procedimiento_adjudicacion) {
+            		case '1':
+            			return "Adjudicacion Directa";
+            			break;
+            		case "2":
+            			return "Invitación a cuando menos tres";
+            			break;
+            		case "3":
+            			return "Licitación Pública";
+            			break;
+            		default:
+            			return "Sin asignar";
+            			break;
+            	}
+            }
 
-    public function getValueProcedimientoAdjudicacionAttribute()
-    {
-    	$procedimiento_adjudicacion = $this->procedimiento_adjudicacion;
-    	switch ($procedimiento_adjudicacion) {
-    		case '1':
-    			return "Adjudicacion Directa";
-    			break;
-    		case "2":
-    			return "Invitación a cuando menos tres";
-    			break;
-    		case "3":
-    			return "Licitación Pública";
-    			break;
-    		default:
-    			return "Sin asignar";
-    			break;
-    	}
-    }
+            public function getValueProcedimientoAdjudicacionAttribute()
+            {
+            	$procedimiento_adjudicacion = $this->procedimiento_adjudicacion;
+            	switch ($procedimiento_adjudicacion) {
+            		case '1':
+            			return "Adjudicacion Directa";
+            			break;
+            		case "2":
+            			return "Invitación a cuando menos tres";
+            			break;
+            		case "3":
+            			return "Licitación Pública";
+            			break;
+            		default:
+            			return "Sin asignar";
+            			break;
+            	}
+            }
 
-    public function getValueAnalistaAttribute()
-    {
-    	return $this->procedimiento->analista->name;
-    }
+            public function getValueAnalistaAttribute()
+            {
+                return $this->procedimiento->analista->name;
+            }
 
-    public function getValueDependenciaAttribute()
-    {
-    	return $this->dependencia->nombre;
-    }
+            public function getValueDependenciaAttribute()
+            {
+                return $this->dependencia->nombre;
+            }
 
-    public function getValueStatusAttribute()
-    {
-        return $this->procedimiento->status;
-    }
+            public function getValueStatusAttribute()
+            {
+                return $this->procedimiento->status;
+            }
 
-    public function getVigencia()
-    {
-        return $this->vigencia ? "SI" : "NO";
-    }
+            public function getVigencia()
+            {
+                return $this->vigencia ? "SI" : "NO";
+            }
 
 }

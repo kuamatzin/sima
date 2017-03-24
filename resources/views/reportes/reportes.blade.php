@@ -70,7 +70,6 @@
                             <th>Techo Presupuestal</th>
                             <th>Dependencia</th>
                             <th>Nombre</th>
-                            <th>Estatus</th>
                             <th>Tipo Procedimiento</th>
                             <th>Analista</th>
                         </tr>
@@ -82,7 +81,6 @@
                             <td>$@{{procedimiento.presupuesto}}</td>
                             <td>@{{procedimiento.value_dependencia}}</td>
                             <td>@{{procedimiento.descripcion}}</td>
-                            <td>@{{procedimiento.is_admin}}</td>
                             <td>@{{procedimiento.value_procedimiento_adjudicacion}}</td>
                             <td>@{{procedimiento.value_analista}}</td>
                         </tr>
