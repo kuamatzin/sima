@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\Proveedor;
+use App\Requisicion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -975,6 +976,7 @@ class ExcelGenerator
 
         foreach ($procedimientos as $key => $procedimiento) {
             //Varios proveedores adjudicados
+            $procedimiento = Requisicion::findOrFail($procedimiento['id']);
             $proveedoresAdjudicados = $procedimiento->procedimiento->proveedoresAdjudicados();
             if (sizeof($proveedoresAdjudicados) > 1) {
                 foreach ($proveedoresAdjudicados as $key => $proveedorAdjudicado) {

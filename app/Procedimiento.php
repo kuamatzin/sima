@@ -102,7 +102,7 @@ class Procedimiento extends Model {
 	public function proveedoresAdjudicados()
 	{
 		$proveedoresSeleccionadosProcedimiento = $this->proveedores;
-		$proveedoresAdjudicados = Proveedor::find($this->hasMany('App\Oferta')->where('ganador', 1)->where('status', 1)->lists('proveedor_id'));
+		$proveedoresAdjudicados = Proveedor::find($this->hasMany('App\Oferta')->where('ganador', 1)->where('status', 1)->pluck('proveedor_id')->toArray());
 
 		return $proveedoresAdjudicados;
 	}
