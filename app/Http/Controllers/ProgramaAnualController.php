@@ -49,7 +49,7 @@ class ProgramaAnualController extends Controller {
 		$programa_anual = new ProgramaAnual;
 		$programa_anual['fuente_financiamiento'] = 0;
 		$nullOption = "Dependencia a la que pertenece";
-		$dependencias = ['' => "$nullOption"] + Dependencia::lists('nombre', 'id');
+		$dependencias = ['' => "$nullOption"] + Dependencia::pluck('nombre', 'id')->toArray();
 		return view('programas_anuales.create', compact('dependencias', 'programa_anual'));
 	}
 
