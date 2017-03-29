@@ -86,7 +86,7 @@ class ProgramaAnualController extends Controller {
 	public function edit($id)
 	{	
 		$nullOption = "Dependencia a la que pertenece";
-		$dependencias = ['' => "$nullOption"] + Dependencia::lists('nombre', 'id');
+		$dependencias = ['' => "$nullOption"] + Dependencia::pluck('nombre', 'id')->toArray();
 		$programa_anual = ProgramaAnual::findOrFail($id);
 		return view('programas_anuales.edit', compact('programa_anual', 'dependencias'));
 	}
