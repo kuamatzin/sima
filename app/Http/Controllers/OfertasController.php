@@ -289,7 +289,7 @@ class OfertasController extends Controller {
 			return view('ofertas.analisis_comparativo', compact('procedimiento', 'partidas', 'ofertas_cuadroComparativo', 'proveedores', 'size_proveedores'));
 		}
 		else {
-			if ($id == 517) {
+			if ($id == 517 || $id == 580) {
 				return response()->download("cuadros_comparativos/$id.xlsx");
 			}
 			else {
