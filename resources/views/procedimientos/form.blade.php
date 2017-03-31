@@ -55,4 +55,4 @@
 	{!! Form::select('analista_id', $analistas, null, ['class' => 'form-control']) !!}
 	<small class="text-danger">{{ $errors->first('analista_id') }}</small>
 </div>
-{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary']) !!}
+{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'submitProcedimiento']) !!}
