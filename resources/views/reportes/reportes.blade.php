@@ -21,7 +21,7 @@
             <div class="form-group col-md-4">
                 <div class="form-group{{ $errors->has('ejercicio_fiscal') ? ' has-error' : '' }}">
                     {!! Form::label('ejercicio_fiscal', 'Ejercicio Fiscal') !!}
-                    {!! Form::select('ejercicio_fiscal',[2016 => '2016'],2016, ['id' => 'ejercicio_fiscal', 'class' => 'form-control', 'v-model' => 'ejercicio_fiscal']) !!}
+                    {!! Form::select('ejercicio_fiscal',[2016 => '2016', 2017 => '2017'],2016, ['id' => 'ejercicio_fiscal', 'class' => 'form-control', 'v-model' => 'ejercicio_fiscal']) !!}
                     <small class="text-danger">{{ $errors->first('ejercicio_fiscal') }}</small>
                 </div>
             </div>
