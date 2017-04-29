@@ -498,7 +498,7 @@ class ExcelGenerator
             // Call them separately
             $excel->setDescription('Cuadro Comparativo');
             if (strlen($descripcion) > 30) {
-                $descripcion = substr($descripcion, 0, 28);
+                $descripcion = mb_substr($descripcion, 0, 28);
             }
             $excel->sheet($descripcion, function($sheet) use($prov, $datos_excel, $celdas, $proveedores, $letras, $partidas, $fila_inicio) {
 
