@@ -500,7 +500,8 @@ class ExcelGenerator
             if (strlen($descripcion) > 30) {
                 $descripcion = mb_substr($descripcion, 0, 28);
             }
-            $excel->sheet($descripcion, function($sheet) use($prov, $datos_excel, $celdas, $proveedores, $letras, $partidas, $fila_inicio) {
+            
+            $excel->sheet('Cuadro Comparativo ' .  $codificacion, function($sheet) use($prov, $datos_excel, $celdas, $proveedores, $letras, $partidas, $fila_inicio) {
 
                 $objDrawing = new PHPExcel_Worksheet_Drawing;
                 $objDrawing->setPath(public_path('images/encabezado_cuadro.png')); //your image path
