@@ -372,12 +372,12 @@ class ExcelGenerator
     }
 
     private function crearFirmas(){
-        $firmas = ['', '', '', '', 'Elaboro', '', 'Revisó', '', 'Autorizo'];
+        $firmas = ['', '', '', '', 'Elaboró', '', 'Revisó'];
         return $firmas;
     }
 
     private function crearNombresFirmas($elaboro){
-        $nombresFirmas = ['', '', '', '', $elaboro, '', 'LIC. ALMA LUZ VILLEGAS POZAS', '', 'LIC. JOSE MANUEL GONZALEZ CATAÑO'];
+        $nombresFirmas = ['', '', '', '', $elaboro, '', 'LIC. ALMA LUZ VILLEGAS POZAS'];
 
         return $nombresFirmas;
     }
@@ -432,21 +432,22 @@ class ExcelGenerator
         array_push($datos_excel, []);
         //Agregamos al final las firmas
         array_push($datos_excel, $nombresFirmas);
-        /*
+       
         array_unshift($datos_excel, $encabezado[0]);
+         /*
         array_unshift($datos_excel, $encabezado[1]);
         array_unshift($datos_excel, $encabezado[2]);
         array_unshift($datos_excel, $encabezado[3]);
         array_unshift($datos_excel, $encabezado[4]);
         */
-        
+        //dd($datos_excel);
         return $datos_excel;
     }
 
     public function descargaCuadroComparativo($id, $descripcion, $proveedores, $partidas, $ofertas_cuadroComparativo, $size_proveedores)
     {
         Excel::create("Cuadro Comparativo Proc: $id", function($excel) use($proveedores, $partidas, $ofertas_cuadroComparativo, $size_proveedores, $descripcion) {
-            $fila_inicio = 2;
+            $fila_inicio = 3;
             $letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
 
             $encabezado = $this->crearHeader($partidas[0]->requisicion->dependencia->nombre);
@@ -552,8 +553,7 @@ class ExcelGenerator
                 }
 
                 //Variable que determina ultima fila de partida
-                $final_partidas = count($partidas) + 4;
-
+                $final_partidas = count($partidas) + $fila_inicio + 2;
                 //Combinar header
                 /*
                 $sheet->mergeCells("A2:$final_letra_proveedores" . "2");
@@ -582,8 +582,9 @@ class ExcelGenerator
                 }
                 */
                 
+                $inicio_formato = "A$fila_inicio";
                 //Formato de fila de proveedores
-                $sheet->cells("A2:$final_letra_proveedores" . "2", function($cells) {                 
+                $sheet->cells("$inicio_formato:$final_letra_proveedores" . "$fila_inicio", function($cells) {                 
                     $cells->setFontColor('#FAFFFF');
                     $cells->setFontSize(11);
                     $cells->setAlignment('center');
@@ -591,7 +592,9 @@ class ExcelGenerator
                 });
 
                 //Formato de fila de menu
-                $sheet->cells("A3:$final_letra_proveedores" . "3", function($cells) {                 
+                $inicio_formato_menu_number = $fila_inicio + 1;
+                $inicio_formato_menu = "A$inicio_formato_menu_number";
+                $sheet->cells("$inicio_formato_menu:$final_letra_proveedores" . "$inicio_formato_menu_number", function($cells) {                 
                     $cells->setFontColor('#09600B');
                     $cells->setAlignment('center');
                     $cells->setBackground('#C7EECF');
@@ -674,28 +677,29 @@ class ExcelGenerator
                 });
 
                 //Poner borders a nombre de requisicion
-                $sheet->cells("A2:D2", function($cells){
+                $sheet->cells("A$fila_inicio:D$fila_inicio", function($cells){
                     $cells->setBorder('thin', 'thin', 'thin', 'thin');
                 });
 
                 //Bordes de nombres de proveedores
                 $letraE = 4;
                 for ($i = 0; $i < sizeof($proveedores); $i++){
-                    $sheet->cells($letras[$letraE] . "2:" . $letras[$letraE+1] . "2", function($cells){
+                    $sheet->cells($letras[$letraE] . "$fila_inicio:" . $letras[$letraE+1] . "$fila_inicio", function($cells){
                         $cells->setBorder('thin', 'thin', 'thin', 'thin');
                     });
                     $letraE = $letraE + 2;
                 }
 
                 //Bordes Partidas, Cantidad, Unidad Medida, Precios Unitarios, Precio Total
+                $fila_inicio_mas_uno = $fila_inicio + 1;
                 $posicion_final_letra_proveedores = array_search($final_letra_proveedores, $letras);
                 for ($i=0; $i < $posicion_final_letra_proveedores + 1; $i++) { 
-                    $sheet->cells($letras[$i] . "3:" . $letras[$i] . "3", function($cells){
+                    $sheet->cells($letras[$i] . "$fila_inicio_mas_uno:" . $letras[$i] . "$fila_inicio_mas_uno", function($cells){
                         $cells->setBorder('thin', 'thin', 'thin', 'thin');
                     });
                 }
                 //Borders de todas las partidas
-                $letra_inicial_partidas = 4;
+                $letra_inicial_partidas = $fila_inicio + 2;
 
                 for ($f=0; $f < sizeof($partidas); $f++) { 
                     for ($i=0; $i < $posicion_final_letra_proveedores + 1; $i++) { 
@@ -756,6 +760,8 @@ class ExcelGenerator
                     });
                     $contador = $contador + 2;
                 }
+
+                //$sheet->mergeCells("A2:$letraFinal" . "2");
 
                 $sheet->with($datos_excel);
             });
