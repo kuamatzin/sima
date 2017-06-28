@@ -260,19 +260,21 @@ class OfertasController extends Controller {
 		$proveedores = array();
 		$procedimiento = Procedimiento::findOrFail($id);
 		$partidas = $procedimiento->requisiciones[0]->partidas;
-		$proveedores_ids = $procedimiento->proveedores->pluck('id')->toArray();
-
+		$proveedores_procedimiento = $procedimiento->proveedores;
+		$proveedores_ids = $proveedores_procedimiento->pluck('id')->toArray();
+		/*
 		$ofertas_cuadroComparativo = Oferta::where('procedimiento_id', $procedimiento->id)->where('status', '!=', 6)->where(function($query) use ($proveedores_ids){
 			foreach ($proveedores_ids as $key => $proveedor_id) {
 				$query->orWhere('proveedor_id', $proveedor_id);
 			}
 		})->orderBy('partida_id', 'asc')->get();
+		*/
+		$ofertas_cuadroComparativo = Oferta::whereIn('proveedor_id', $proveedores_ids)->where('procedimiento_id', $id)->where('status', '!=', 6)->orderBy('partida_id', 'asc')->get();
 		//$ofertas_cuadroComparativo = Oferta::where('procedimiento_id', $procedimiento->id)->where('status', '!=', 6)->orderBy('partida_id', 'asc')->get();
 
-		$size_proveedores = sizeof($procedimiento->proveedores);
-		$partidas = $procedimiento->requisiciones[0]->partidas;
 		//Aqui se ordenan los nombres de proveedores
-		for ($i=0; $i < sizeof($procedimiento->proveedores); $i++) {
+		$size_proveedores = sizeof($proveedores_procedimiento);
+		for ($i=0; $i < $size_proveedores; $i++) {
 			array_push($proveedores, Proveedor::select('id', 'nombre')->where('id', $ofertas_cuadroComparativo[$i]->proveedor_id)->get());
 		}
 		$ofertas_cuadroComparativo_final = [];
