@@ -1,5 +1,4 @@
 <?php namespace App\Http\Controllers;
-dd(phpinfo());
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
