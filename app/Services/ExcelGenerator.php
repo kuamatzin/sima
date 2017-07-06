@@ -377,7 +377,7 @@ class ExcelGenerator
     }
 
     private function crearNombresFirmas($elaboro){
-        $nombresFirmas = ['', '', '', '', $elaboro, '', 'LIC. ALMA LUZ VILLEGAS POZAS'];
+        $nombresFirmas = ['', '', '', '', $elaboro, '', 'C.P. BLANCA AZUCENA CORTÉS ZARATE'];
 
         return $nombresFirmas;
     }

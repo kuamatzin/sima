@@ -59,8 +59,8 @@
             </a>
             <br>
             <br>
-            <p class="text-center">LIC. JOSÉ MANUEL GARCÍA VALENCIA</p>
-            <p class="text-center">DIRECTOR DE RECURSOS MATERIALES, SERVICIOS Y ADQUISICIONES</p>
+            <p class="text-center">C.P, MARÍA GUADALUPE PÉREZ FLORESA</p>
+            <p class="text-center">DIRECTORA DE RECURSOS MATERIALES, SERVICIOS Y ADQUISICIONES</p>
             <p class="text-center">PARA CUALQUIER DUDA COMUNICARSE AL DEPARTAMENTO DE ADQUISICIONES</p>
             <p class="text-center">
                 LEONARDA GOMEZ BLANCO No. 60 ALTOS, ACXOTLA DEL RIO, TOTOLAC, TLAX. C.P. 90160
