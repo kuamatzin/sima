@@ -40,7 +40,7 @@ class UsuariosController extends Controller {
 	public function create()
 	{	
 		$nullOption = "Dependencia a administrar";
-		$dependencias = ['' => "$nullOption"] + Dependencia::lists('nombre', 'id');
+		$dependencias = ['' => "$nullOption"] + Dependencia::pluck('nombre', 'id')->toArray();
 		return view('usuarios.create', compact('dependencias'));
 	}
 
