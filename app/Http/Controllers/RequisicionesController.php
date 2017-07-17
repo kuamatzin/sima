@@ -63,7 +63,8 @@ class RequisicionesController extends Controller {
 		$editar_codigo = false;
 		if ($request->regularizar == null) {
 			if (!$edit) {
-				$last_requisicion = Requisicion::where('mes', $mytime->month)->orderBy('consecutivo', 'desc')->first();
+				$last_requisicion = Requisicion::where('mes', $mytime->month)->where('anio', $mytime->year)->orderBy('consecutivo', 'desc')->first();
+				dd($last_requisicion);
 				if ($last_requisicion == null) {
 					$request['consecutivo'] = 1;
 				}
