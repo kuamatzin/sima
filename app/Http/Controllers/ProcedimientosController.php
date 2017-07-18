@@ -75,13 +75,19 @@ class ProcedimientosController extends Controller {
 	 */
 	public function store(ProcedimientoRequest $request)
 	{
-		$procedimiento = Procedimiento::create($request->all());
-		foreach ($request->requisicion as $key => $requisicion_id) {
-			$requisicion = Requisicion::findOrFail($requisicion_id);
-			$requisicion->procedimiento_id = $procedimiento->id;
-			$requisicion->asignada = 1;
-			$requisicion->save();
+		if (sizeof($request->requisicion) == 1) {
+			$procedimiento = Procedimiento::create($request->all());
+			foreach ($request->requisicion as $key => $requisicion_id) {
+				$requisicion = Requisicion::findOrFail($requisicion_id);
+				$requisicion->procedimiento_id = $procedimiento->id;
+				$requisicion->asignada = 1;
+				$requisicion->save();
+			}
 		}
+		else {
+			dd("Algo esta pasando, contactar al administrador del sistema");
+		}
+		
 		Flash::success('Procedimiento creado correctamente');
 		return redirect('procedimientos');
 	}
