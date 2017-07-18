@@ -54,10 +54,10 @@ class ReportesController extends Controller {
         }
 
         $procedimientos->where('anio', $request->ejercicio_fiscal);
-        $procedimientos = $procedimientos->get()->toArray();
+        $procedimientos = $procedimientos->get();
         if ($request->proveedor != '') {
             foreach ($procedimientos as $key => $procedimiento) {
-                $proveedoresAdjudicados = $procedimiento->procedimiento->proveedoresAdjudicados()->pluck('id');
+                $proveedoresAdjudicados = $procedimiento->procedimiento->proveedoresAdjudicados()->pluck('id')->toArray();
                 //Verifica si el proveedor esta dentro de los ganadores
                 if (!in_array($request->proveedor, $proveedoresAdjudicados)) {
                     $procedimientos = $procedimientos->except($procedimiento->id);

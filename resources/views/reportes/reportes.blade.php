@@ -60,6 +60,7 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-body">
+            <img width="130px" src="http://intuitglobal.intuit.com/delivery/cms/prod/sites/default/intuit.ca/images/quickbooks-sui-images/loader.gif" alt="" class="center-block" v-if="loading">
             <h1>Resultados</h1>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -100,6 +101,7 @@
         el: "#app",
         data: {
             procedimientos: '',
+            loading: false
         },
         ready: function(){
 
@@ -107,7 +109,9 @@
         methods: {
             busqueda: function(){
                 var that = this;
+                this.loading = true;
                 this.$http.get('/reportes/busqueda' + '?tipo_procedimiento=' + this.tipo_procedimiento + '&usuario_id=' + this.usuario_id + '&ejercicio_fiscal=' + this.ejercicio_fiscal + '&dependencia_id=' + this.dependencia_id + '&status=' + this.status + '&proveedor=' + this.proveedor ).then(function(requisiciones){
+                    that.loading = false;
                     that.procedimientos = requisiciones.data;
                 }, function(error){
                     console.log(error)
@@ -115,8 +119,10 @@
             },
             buscar_por_procedimiento: function(){
                 var that = this;
+                this.loading = true;
                 this.$http.get('/reportes/busqueda_por_procedimiento' + '?codificacion=' + this.codificacion).then(function(procedimiento){
                     console.log(procedimiento.data)
+                    that.loading = false;
                     that.procedimientos = procedimiento.data;
                 }, function(error){
                     console.log(error)
