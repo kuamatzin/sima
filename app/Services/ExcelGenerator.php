@@ -20,6 +20,7 @@ class ExcelGenerator
             return true;
         }
     }
+
     private function createDate($string){
         if (strpos($string, '/') !== false) {
             $string = str_replace("RENOVO", "", $string);
@@ -977,7 +978,7 @@ class ExcelGenerator
         return $excel;
     }
 
-    private function crear_datos_archivo($procedimientos)
+    private function crear_datos_archivo($procedimientos, $proveedor)
     {
         $datos_array = array();
 
@@ -985,6 +986,9 @@ class ExcelGenerator
             //Varios proveedores adjudicados
             $procedimiento = Requisicion::findOrFail($procedimiento['id']);
             $proveedoresAdjudicados = $procedimiento->procedimiento->proveedoresAdjudicados();
+            if ($proveedor) {
+                $proveedoresAdjudicados = $proveedoresAdjudicados->where('id', $proveedor);
+            }
             if (sizeof($proveedoresAdjudicados) > 1) {
                 foreach ($proveedoresAdjudicados as $key => $proveedorAdjudicado) {
                     if ($key == 0) {
@@ -997,7 +1001,15 @@ class ExcelGenerator
                 }
             }
             else {
-                $datos_factura = [$key+1, $procedimiento->procedimiento->numeroProcedimiento(), $procedimiento->presupuesto, $procedimiento->dependencia->nombre, $procedimiento->origenRecursos($procedimiento->origen_recursos), $procedimiento->partida_presupuestal, $procedimiento->descripcion, $procedimiento->procedimiento->status, $procedimiento->procedimiento->proveedoresAdjudicadosFormated(), $procedimiento->procedimiento->totalAdjudicado(), $procedimiento->procedimiento->totalAdjudicado(), '', '', $procedimiento->procedimiento->analista->name];
+                if ($proveedor) {
+                    $nombre = $proveedoresAdjudicados->first()->nombre;
+                    $montos = $procedimiento->procedimiento->adjudicadoPorProveedor($proveedoresAdjudicados->first()->id);
+                }
+                else {
+                    $nombre = $procedimiento->procedimiento->proveedoresAdjudicadosFormated();
+                    $montos = $procedimiento->procedimiento->totalAdjudicado();
+                }
+                $datos_factura = [$key+1, $procedimiento->procedimiento->numeroProcedimiento(), $procedimiento->presupuesto, $procedimiento->dependencia->nombre, $procedimiento->origenRecursos($procedimiento->origen_recursos), $procedimiento->partida_presupuestal, $procedimiento->descripcion, $procedimiento->procedimiento->status, $nombre, $montos, $procedimiento->procedimiento->totalAdjudicado(), '', '', $procedimiento->procedimiento->analista->name];
                 array_push($datos_array, $datos_factura);
             }
         }
@@ -1016,13 +1028,13 @@ class ExcelGenerator
         return $excel;
     }
 
-    public function descargarReporte($procedimientos)
+    public function descargarReporte($procedimientos, $proveedor)
     {
-        Excel::create('reporteInforme', function($excel) use ($procedimientos) {
+        Excel::create('reporteInforme', function($excel) use ($procedimientos, $proveedor) {
 
             $excel = $this->datos_de_archivo($excel);
 
-            $datos = $this->crear_datos_archivo($procedimientos);
+            $datos = $this->crear_datos_archivo($procedimientos, $proveedor);
 
             $excel = $this->crear_hoja($excel, $datos);
 

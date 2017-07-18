@@ -36,7 +36,7 @@ class ReportesController extends Controller {
             }
             else {
                 $proc = Procedimiento::where('analista_id', (int)$request->usuario_id)->pluck('id');
-            }  
+            }
             $procedimientos->whereIn('procedimiento_id', $proc);
         }
         else {
@@ -80,8 +80,9 @@ class ReportesController extends Controller {
 
     public function descargar(Request $request)
     {
+        $proveedor = $request->proveedor;
         $procedimientos = $this->busqueda($request);
         $excel = new ExcelGenerator;
-        $excel->descargarReporte($procedimientos);
+        $excel->descargarReporte($procedimientos, $proveedor);
     }
 }
