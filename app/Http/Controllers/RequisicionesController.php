@@ -199,7 +199,7 @@ class RequisicionesController extends Controller {
 	public function duplicate($id)
 	{
 		$mytime = Carbon::now();
-		$last_requisicion = Requisicion::where('mes', $mytime->month)->orderBy('consecutivo', 'desc')->first();
+		$last_requisicion = Requisicion::where('mes', $mytime->month)->where('anio', $mytime->year)->orderBy('consecutivo', 'desc')->first();
 		$nuevaRequisición = Requisicion::find($id)->replicate();
 		$nuevaRequisición->mes = $mytime->month;
 		$nuevaRequisición->consecutivo = $last_requisicion->consecutivo + 1;
