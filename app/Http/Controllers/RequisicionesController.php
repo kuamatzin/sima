@@ -148,6 +148,7 @@ class RequisicionesController extends Controller {
 		$requisicion->instalacion = $request->instalacion == null ? 0 : 1;
 		$requisicion->empacado = $request->empacado == null ? 0 : 1;
 		$requisicion->lista_requisitos = $request->lista_requisitos == null ? '' : $request->lista_requisitos;
+		dd($requisicion);
 		$requisicion->save();
 	}
 
