@@ -85,4 +85,11 @@ class ReportesController extends Controller {
         $excel = new ExcelGenerator;
         $excel->descargarReporte($procedimientos, $proveedor);
     }
+
+    public function  requisiciones($anio)
+    {
+        $requisiciones = Requisicion::where('anio', $anio)->get();
+        $excel = new ExcelGenerator;
+        $excel->descargarRequisiciones($requisiciones);
+    }
 }

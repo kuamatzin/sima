@@ -180,6 +180,7 @@ Route::delete('facturas/{factura_id}', 'FacturasController@destroy');
 //Reportes routes
 Route::get('/reportes_procedimientos', 'ReportesController@index');
 Route::get('reportes/busqueda', 'ReportesController@busqueda');
+Route::get('reportes/requisiciones/{anio}', 'ReportesController@requisiciones');
 Route::get('/reportes/descargar', 'ReportesController@descargar');
 Route::get('reportes/busqueda_por_procedimiento', 'ReportesController@busqueda_por_procedimiento');
 

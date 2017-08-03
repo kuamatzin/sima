@@ -973,7 +973,7 @@ class ExcelGenerator
               ->setCompany('SIAA');
 
         // Call them separately
-        $excel->setDescription('Reporte de procedimientos');
+        $excel->setDescription('Reporte');
 
         return $excel;
     }
@@ -1040,4 +1040,43 @@ class ExcelGenerator
 
         })->download('xlsx');;
     }
+
+    public function descargarRequisiciones($requisiciones)
+    {
+        Excel::create('reporteRequisiciones', function($excel) use ($requisiciones) {
+
+            $excel = $this->datos_de_archivo($excel);
+
+            $datos = $this->crear_datos_archivo_requisiciones($requisiciones);
+
+            $excel = $this->crear_hoja($excel, $datos);
+
+        })->download('xlsx');;
+    }
+
+    public function crear_datos_archivo_requisiciones($requisiciones)
+    {
+        $datos_array = [];
+
+        foreach ($requisiciones as $key => $requisicion) {
+            $datos_requisicion = [
+                $requisicion->id,
+                $requisicion->mes . '_' . $requisicion->consecutivo . '-' . $requisicion->anio,
+                strlen($requisicion->descripcion) > 60 ? substr($requisicion->descripcion, 0, 59) . '...' : $requisicion->descripcion,
+                $requisicion->dependencia->nombre,
+                $requisicion->usuario->name,
+                $requisicion->status,
+                $requisicion->presupuesto,
+                $requisicion->origenRecursos($requisicion->origen),
+                $requisicion->created_at
+            ];
+            array_push($datos_array, $datos_requisicion);
+        }
+        $nombres_columnas = ['Id', 'Codificación', 'Descripcion', 'Dependencia', 'Asesor', 'Status', 'Presupuesto', 'Tipo de Recurso' ,'Fecha Creación'];
+
+        array_unshift($datos_array, $nombres_columnas);
+        return $datos_array;
+    }
 }
+
+
