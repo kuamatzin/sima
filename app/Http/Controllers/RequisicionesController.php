@@ -11,6 +11,7 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Laracasts\Flash\Flash;
 
 class RequisicionesController extends Controller {
@@ -28,17 +29,23 @@ class RequisicionesController extends Controller {
 	public function index()
 	{
 		$programa_anual = false;
+		$anio = Input::get('anio');
+		$mes = Input::get('mes');
+		$month = $mes ? $mes : Carbon::now()->month;
+		$year = $anio ? $anio : Carbon::now()->year;
+		$requisiciones = Requisicion::where('anio', $year)->where('mes', $month);
 		if (Auth::user()->isAnalista()) {
-			$requisiciones = Requisicion::where('dependencia_id', Auth::user()->dependencia_id)->get();
+			$requisiciones = $requisiciones->where('dependencia_id', Auth::user()->dependencia_id)->get();
 		}
 		elseif (Auth::user()->isAnalistaUnidad()) {
-			$requisiciones = Requisicion::where('unidad_administrativa_id', Auth::user()->unidad_administrativa_id)->get();
+			$requisiciones = $requisiciones->where('unidad_administrativa_id', Auth::user()->unidad_administrativa_id)->get();
 		}
 		else {
-			$requisiciones = Requisicion::all();
+			$requisiciones = $requisiciones->get();
 		}
+
 		$dependencias = Dependencia::all();
-		return view('requisiciones.index', compact('programa_anual', 'requisiciones', 'dependencias'));
+		return view('requisiciones.index', compact('programa_anual', 'requisiciones', 'dependencias', 'year', 'month'));
 	}
 
 	/**

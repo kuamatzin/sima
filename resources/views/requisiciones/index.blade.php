@@ -5,6 +5,33 @@
         <h1><i class="fa fa-file"></i> Requisiciones</h1>
           <a href="{{ url('requisiciones/create')}}"><button type="button" class="btn btn-primary">Crear requisicion <i class="fa fa-plus"></i></button></a>
         <hr>
+        <div class="row">
+          <div class="col-md-2">
+            <label for="">Ejercicio Fiscal</label>
+            <select id="ejercicio_fiscal" class="form-control" required="required">
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="">Mes</label>
+            <select id="mes" class="form-control" required="required">
+              <option value="1">Enero</option>
+              <option value="2">Febrero</option>
+              <option value="3">Marzo</option>
+              <option value="4">Abril</option>
+              <option value="5">Mayo</option>
+              <option value="6">Junio</option>
+              <option value="7">Julio</option>
+              <option value="8">Agosto</option>
+              <option value="9">Septiembre</option>
+              <option value="10">Octubre</option>
+              <option value="11">Noviembre</option>
+              <option value="12">Diciembre</option>
+            </select>
+          </div>
+        </div>
+        <br><br>
         <input type="text" name="" id="search" class="form-control" value="" required="required" pattern="" title=""><br>
         <table class="table table-bordered table-hover" id="table">
           <thead>
@@ -69,6 +96,15 @@
 @endsection
 @section('scripts')
 <script>
+    $("#mes").val({{$month}});
+    $('#mes').change(function(event) {
+      window.location = '/requisiciones?anio=' + $('#ejercicio_fiscal').val() + '&mes=' + $('#mes').val();
+    });
+
+    $("#ejercicio_fiscal").val({{$year}});
+    $('#ejercicio_fiscal').change(function(event) {
+      window.location = '/requisiciones?anio=' + $('#ejercicio_fiscal').val() + '&mes=' + $('#mes').val();
+    });
     var $rows = $('#table #searchable');
     $('#search').keyup(function() {
         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
