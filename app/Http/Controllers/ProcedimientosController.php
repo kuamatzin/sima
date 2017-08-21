@@ -9,6 +9,7 @@ use App\Procedimiento;
 use App\Proveedor;
 use App\Requisicion;
 use App\User;
+use Carbon\Carbon;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -28,14 +29,11 @@ class ProcedimientosController extends Controller {
 	 */
 	public function index()
 	{
-		
-		if (Input::get('anio')) {
-			$año = Input::get('anio');
-		}
-		else {
-			$año = date("Y");
-		}
-		//dd($año);
+		$anio = Input::get('anio');
+		$mes = Input::get('mes');
+		$month = $mes ? $mes : Carbon::now()->month;
+		$año = $anio ? $anio : Carbon::now()->year;
+
 		if (Auth::user()->isAnalistaProcedimiento()) {
 			$procedimientos = Procedimiento::where('analista_id', Auth::user()->id)->whereYear('created_at', '=', $año)->get();
 		}
@@ -49,7 +47,7 @@ class ProcedimientosController extends Controller {
 				dd($procedimiento->id);
 			}
 		}
-		
+
 		
 		return view('procedimientos.index', compact('procedimientos', 'año'));
 	}

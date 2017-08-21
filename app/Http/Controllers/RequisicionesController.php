@@ -211,6 +211,8 @@ class RequisicionesController extends Controller {
 		$nuevaRequisición->mes = $mytime->month;
 		$nuevaRequisición->consecutivo = $last_requisicion->consecutivo + 1;
 		$nuevaRequisición->anio = $mytime->year;
+		$nuevaRequisición->procedimiento_id = null;
+		$nuevaRequisición->asignada = 0;
 		$nuevaRequisición->save();
 		Flash::success('Requisicion duplicada correctamente');
 		return redirect('requisiciones');
