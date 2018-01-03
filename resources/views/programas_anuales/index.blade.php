@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-md-2 form-group{{ $errors->has('ejercicio_fiscal') ? ' has-error' : '' }}">
     {!! Form::label('ejercicio_fiscal', 'Ejericicio Fiscal') !!}
-    {!! Form::select('ejercicio_fiscal', [2016 => '2016', 2017 => '2017'], $año, ['id' => 'ejercicio_fiscal', 'class' => 'form-control', 'id' => 'ejercicio_fiscal_select']) !!}
+    {!! Form::select('ejercicio_fiscal', [2016 => '2016', 2017 => '2017', 2018 => '2018'], $año, ['id' => 'ejercicio_fiscal', 'class' => 'form-control', 'id' => 'ejercicio_fiscal_select']) !!}
     <small class="text-danger">{{ $errors->first('ejercicio_fiscal') }}</small>
   </div>
 </div>
